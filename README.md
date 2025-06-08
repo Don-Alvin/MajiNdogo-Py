@@ -1,79 +1,83 @@
-# Maji Ndogo Project
+# MajiNdogo Data Pipeline
 
-## Introduction
+This project implements a data pipeline for ingesting, transforming, cleaning, and preparing agricultural data for analysis. The pipeline also includes validation tests to ensure data quality.
 
-Welcome to the Maji Ndogo project! This initiative aims to automate farming in Maji Ndogo, a region with diverse and challenging agricultural landscapes. Our mission is to make informed decisions about where and what to plant, considering factors like rainfall, soil type, climate, and more.
+## Data Pipeline Steps
 
-Our analysis forms the foundation of this automation project. By examining variables such as soil fertility, climate conditions, and geographical data, we can recommend the best locations for different crops. Think of it as solving a complex puzzle—each piece of data is crucial to seeing the bigger picture.
+1. **Ingest Data**  
+    - Load raw data from CSV files and other sources.
 
-We'll begin by importing our dataset from an SQLite database, which is split into multiple tables. Unlike tools like Power BI or SQL, Python data analysis typically happens in a single DataFrame.
+2. **Transform Data**  
+    - Convert ingested data into pandas DataFrames.
+    - Join and merge datasets as needed.
 
-Once the data is ready, we'll dive deep to uncover patterns and correlations, guiding us toward the best farming practices for Maji Ndogo.
+3. **Clean Data**  
+    - Handle missing values, outliers, and inconsistent data.
+    - Standardize formats and data types.
 
-Let's get started and make a real difference!
+4. **Prepare Data for Analysis**  
+    - Feature engineering and selection.
+    - Normalize and encode categorical variables.
+
+5. **Validate Data**  
+    - Run tests to ensure data integrity and correctness.
+
+---
 
 ## Data Dictionary
 
-### 1. Geographic Features
+### Geographic Features
 
-- **Field_ID**: Unique identifier for each field (BigInt)
-- **Elevation**: Elevation above sea level in metres (Float)
-- **Latitude**: Geographical latitude in degrees (Float)
-- **Longitude**: Geographical longitude in degrees (Float)
-- **Location**: Province the field is in (Text)
-- **Slope**: Slope of the land (Float)
+| Field         | Type    | Description                                                      |
+|---------------|---------|------------------------------------------------------------------|
+| Field_ID      | BigInt  | Unique identifier for each field                                 |
+| Elevation     | Float   | Elevation above sea level (metres)                               |
+| Latitude      | Float   | Geographical latitude (degrees)                                  |
+| Longitude     | Float   | Geographical longitude (degrees)                                 |
+| Location      | Text    | Province the field is in                                         |
+| Slope         | Float   | Slope of the land                                                |
 
-### 2. Weather Features
+### Weather Features
 
-- **Field_ID**: Corresponding field identifier (BigInt)
-- **Rainfall**: Rainfall in mm (Float)
-- **Min_temperature_C**: Average minimum temperature in Celsius (Float)
-- **Max_temperature_C**: Average maximum temperature in Celsius (Float)
-- **Ave_temps**: Average temperature in Celsius (Float)
+| Field             | Type    | Description                                                  |
+|-------------------|---------|--------------------------------------------------------------|
+| Field_ID          | BigInt  | Corresponding field identifier                               |
+| Rainfall          | Float   | Rainfall in mm                                               |
+| Min_temperature_C | Float   | Average minimum temperature (°C)                             |
+| Max_temperature_C | Float   | Average maximum temperature (°C)                             |
+| Ave_temps         | Float   | Average temperature (°C)                                     |
 
-### 3. Soil and Crop Features
+### Soil and Crop Features
 
-- **Field_ID**: Corresponding field identifier (BigInt)
-- **Soil_fertility**: Soil fertility (0 = infertile, 1 = very fertile) (Float)
-- **Soil_type**: Type of soil (Text)
-- **pH**: Soil pH level (Float)
+| Field         | Type    | Description                                                      |
+|---------------|---------|------------------------------------------------------------------|
+| Field_ID      | BigInt  | Corresponding field identifier                                   |
+| Soil_fertility| Float   | Soil fertility (0 = infertile, 1 = very fertile)                 |
+| Soil_type     | Text    | Type of soil                                                     |
+| pH            | Float   | Soil pH level                                                    |
 
-### 4. Farm Management Features
+### Farm Management Features
 
-- **Field_ID**: Corresponding field identifier (BigInt)
-- **Pollution_level**: Pollution (0 = unpolluted, 1 = very polluted) (Float)
-- **Plot_size**: Plot size in hectares (Float)
-- **Chosen_crop**: Crop chosen for cultivation (Text)
-- **Annual_yield**: Total annual yield (Float)
-- **Standard_yield**: Standardised yield per crop (Float)
+| Field           | Type    | Description                                                    |
+|-----------------|---------|----------------------------------------------------------------|
+| Field_ID        | BigInt  | Corresponding field identifier                                 |
+| Pollution_level | Float   | Pollution level (0 = unpolluted, 1 = very polluted)            |
+| Plot_size       | Float   | Plot size (Ha)                                                 |
+| Chosen_crop     | Text    | Crop chosen for cultivation                                    |
+| Annual_yield    | Float   | Total annual yield from the field                              |
+| Standard_yield  | Float   | Standardized yield per crop                                    |
 
-#### Average Yield (tons/Ha) per Crop Type
+### Weather Station Data (CSV)
 
-| Crop    | Yield (tons/Ha) |
-|---------|-----------------|
-| Coffee  | 1.5             |
-| Wheat   | 3               |
-| Rice    | 4.5             |
-| Maize   | 5.5             |
-| Tea     | 1.2             |
-| Potato  | 20              |
-| Banana  | 30              |
-| Cassava | 13              |
+| Field              | Type   | Description                                                  |
+|--------------------|--------|--------------------------------------------------------------|
+| Weather_station_ID | Int    | Weather station identifier                                   |
+| Message            | Str    | Sensor-captured weather data (text message)                  |
 
----
+### Weather Data Field Mapping (CSV)
 
-## Getting Started: Importing Data
+| Field              | Type   | Description                                                  |
+|--------------------|--------|--------------------------------------------------------------|
+| Field_ID           | Int    | Field identifier (join key)                                  |
+| Weather_station_ID | Int    | Closest weather station identifier                           |
 
-The dataset is stored in an SQLite database (`Maji_Ndogo_farm_survey.db`) with multiple tables. To prepare for analysis:
-
-1. **Join tables**: Use SQL to join tables on the common key `Field_ID`.
-2. **Import to DataFrame**: Load the joined data into a single DataFrame in Python.
-3. **Clean and reshape**: Tidy up the data, handle missing values, and reshape as needed.
-
-This process sets the stage for all subsequent analyses and insights.
-
----
-
-Let's dive into the data and uncover the stories it has to tell!
-
-Karibu Sana.

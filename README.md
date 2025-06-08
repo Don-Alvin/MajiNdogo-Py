@@ -6,7 +6,7 @@ Welcome to the Maji Ndogo project! This initiative aims to automate farming in M
 
 Our analysis forms the foundation of this automation project. By examining variables such as soil fertility, climate conditions, and geographical data, we can recommend the best locations for different crops. Think of it as solving a complex puzzle—each piece of data is crucial to seeing the bigger picture.
 
-We'll begin by importing our dataset from an SQLite database, which is split into multiple tables. Unlike tools like Power BI or SQL, Python data analysis typically happens in a single DataFrame. This means we'll need to use SQL skills to join and clean the data before analysis.
+We'll begin by importing our dataset from an SQLite database, which is split into multiple tables. Unlike tools like Power BI or SQL, Python data analysis typically happens in a single DataFrame.
 
 Once the data is ready, we'll dive deep to uncover patterns and correlations, guiding us toward the best farming practices for Maji Ndogo.
 

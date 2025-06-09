@@ -63,6 +63,7 @@ class FieldDataProcessor:
         weather_df = read_csv_web(self.weather_map_url)
         if weather_df is not None:
             self.df = self.df.merge(weather_df, on='Field_ID', how='left')
+            self.df.drop(columns=['Unnamed: 0'], inplace=True, errors='ignore')
             self.logger.info("Joined weather data to the main DataFrame.")
         else:
             self.logger.error("Failed to load weather data from CSV.")

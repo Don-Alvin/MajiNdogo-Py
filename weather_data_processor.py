@@ -67,7 +67,7 @@ class WeatherDataProcessor:
             self.logger.warning('Weather DataFrame is not loaded. Cannot calculate averages.')
             return None
         
-    def process(self):
+    def process_data(self):
         self.weather_station_data()
         self.process_messages()
         averages = self.calculate_average()
